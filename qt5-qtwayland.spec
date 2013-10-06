@@ -4,7 +4,7 @@
 Summary:        Qt5 - Wayland platform support and QtCompositor module
 Name:           qt5-%{qt_module}
 Version:        5.1.0
-Release:        0.2.20130826git3b0b90b%{?dist}
+Release:        0.1.20130826git3b0b90b%{?dist}
 # Full license texts are yet to be included upstream:
 # https://codereview.qt-project.org/65586
 License:        LGPLv2 with exceptions or GPLv3 with exceptions
@@ -13,10 +13,9 @@ Url:            http://qt-project.org/wiki/QtWayland
 # cd qtwayland/
 # git archive 3b0b90b --prefix=qtwayland/ |gzip >qtwayland.tar.gz
 Source0:        qtwayland.tar.gz
-Patch0:         0001-Plugin-API-version-5.2.patch
 
-BuildRequires:  qt5-qtbase-devel >= 5.2
-BuildRequires:  qt5-qtbase-static >= 5.2
+BuildRequires:  qt5-qtbase-devel >= %{version}
+BuildRequires:  qt5-qtbase-static >= %{version}
 BuildRequires:  pkgconfig(xkbcommon)
 BuildRequires:  pkgconfig(wayland-scanner)
 BuildRequires:  pkgconfig(wayland-server)
@@ -47,7 +46,6 @@ Requires:       qt5-qtbase-devel%{?_isa}
 
 %prep
 %setup -q -n %{qt_module}
-%patch0 -p1
 
 
 %build
@@ -86,9 +84,6 @@ install -pm644 src/compositor/{wayland-wayland-server-protocol.h,qwayland-server
 
 
 %changelog
-* Sun Oct 06 2013 Lubomir Rintel <lkundrak@v3.sk> - 5.1.0-0.2.20130826git3b0b90b
-- Bump platform plugin ABI to 5.2 for Qt 5.2 aplha
-
 * Wed Sep 11 2013 Lubomir Rintel <lkundrak@v3.sk> - 5.1.0-0.1.20130826git3b0b90b
 - Initial packaging
 - Adjustments from review (Rex Dieter, #1008529)
