@@ -4,7 +4,7 @@
 Summary:        Qt5 - Wayland platform support and QtCompositor module
 Name:           qt5-%{qt_module}
 Version:        5.1.0
-Release:        0.2.20130826git3b0b90b%{?dist}
+Release:        0.3.20130826git3b0b90b%{?dist}
 # Full license texts are yet to be included upstream:
 # https://codereview.qt-project.org/65586
 License:        LGPLv2 with exceptions or GPLv3 with exceptions
@@ -57,15 +57,14 @@ make %{?_smp_mflags}
 
 
 %install
-make install INSTALL_ROOT=$RPM_BUILD_ROOT
+make install INSTALL_ROOT=%{buildroot}
 install -pm644 src/compositor/{wayland-wayland-server-protocol.h,qwayland-server-wayland.h} \
-        $RPM_BUILD_ROOT%{_qt5_headerdir}/QtCompositor/%{version}/QtCompositor/private
+        %{buildroot}%{_qt5_headerdir}/QtCompositor/%{version}/QtCompositor/private
 
 
 %post -p /sbin/ldconfig
-
-
 %postun -p /sbin/ldconfig
+
 
 %files
 %{_qt5_plugindir}/platforms
@@ -86,6 +85,9 @@ install -pm644 src/compositor/{wayland-wayland-server-protocol.h,qwayland-server
 
 
 %changelog
+* Thu Oct 24 2013 Lubomir Rintel <lkundrak@v3.sk> - 5.1.0-0.3.20130826git3b0b90b
+- Bulk sad and useless attempt at consistent SPEC file formatting
+
 * Sun Oct 06 2013 Lubomir Rintel <lkundrak@v3.sk> - 5.1.0-0.2.20130826git3b0b90b
 - Bump platform plugin ABI to 5.2 for Qt 5.2 aplha
 
