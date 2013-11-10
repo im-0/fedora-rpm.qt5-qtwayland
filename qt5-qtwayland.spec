@@ -4,7 +4,7 @@
 Summary:        Qt5 - Wayland platform support and QtCompositor module
 Name:           qt5-%{qt_module}
 Version:        5.1.0
-Release:        0.3.20130826git3b0b90b%{?dist}
+Release:        0.4.20130826git3b0b90b%{?dist}
 # Full license texts are yet to be included upstream:
 # https://codereview.qt-project.org/65586
 License:        LGPLv2 with exceptions or GPLv3 with exceptions
@@ -85,6 +85,9 @@ install -pm644 src/compositor/{wayland-wayland-server-protocol.h,qwayland-server
 
 
 %changelog
+* Sun Nov 10 2013 Rex Dieter <rdieter@fedoraproject.org> 5.1.0-0.4.20130826git3b0b90b
+- rebuild (arm/qreal)
+
 * Thu Oct 24 2013 Lubomir Rintel <lkundrak@v3.sk> - 5.1.0-0.3.20130826git3b0b90b
 - Bulk sad and useless attempt at consistent SPEC file formatting
 
