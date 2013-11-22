@@ -91,6 +91,10 @@ install -pm644 gl/src/compositor/{wayland-wayland-server-protocol.h,qwayland-ser
 
 
 %changelog
+* Fri Nov 22 2013 Lubomir Rintel <lkundrak@v3.sk> - 5.1.0-0.4.20131120git8cd1a77%
+- Rebase to a later snapshot, drop 5.2 ABI patch
+- Enable nogl backend
+
 * Sun Nov 10 2013 Rex Dieter <rdieter@fedoraproject.org> 5.1.0-0.4.20130826git3b0b90b
 - rebuild (arm/qreal)
 
