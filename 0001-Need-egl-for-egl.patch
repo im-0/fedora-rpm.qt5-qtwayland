@@ -1,0 +1,39 @@
+From 79cc0a42d0af9f75a75565d18bad2c945981c274 Mon Sep 17 00:00:00 2001
+From: Lubomir Rintel <lkundrak@v3.sk>
+Date: Fri, 22 Nov 2013 14:39:33 +0100
+Subject: [PATCH] Need egl for egl
+
+---
+ config.tests/egl/egl.pro                 | 3 ++-
+ config.tests/wayland_egl/wayland_egl.pro | 1 +
+ 2 files changed, 3 insertions(+), 1 deletion(-)
+
+diff --git a/config.tests/egl/egl.pro b/config.tests/egl/egl.pro
+index 9886579..402477d 100644
+--- a/config.tests/egl/egl.pro
++++ b/config.tests/egl/egl.pro
+@@ -1,7 +1,8 @@
+ TARGET = egl
+ QT = core
+ 
+-!contains(QT_CONFIG, opengl): error("wayland_egl support requires Qt configured with OpenGL")
++!contains(QT_CONFIG, opengl): error("egl support requires Qt configured with OpenGL")
++!contains(QT_CONFIG, egl): error("egl support requires Qt configured with EGL")
+ 
+ !contains(QT_CONFIG, no-pkg-config) {
+     CONFIG += link_pkgconfig
+diff --git a/config.tests/wayland_egl/wayland_egl.pro b/config.tests/wayland_egl/wayland_egl.pro
+index 3b7fdfe..42d6b13 100644
+--- a/config.tests/wayland_egl/wayland_egl.pro
++++ b/config.tests/wayland_egl/wayland_egl.pro
+@@ -2,6 +2,7 @@ TARGET = wayland_egl
+ QT = core
+ 
+ !contains(QT_CONFIG, opengl): error("wayland_egl support requires Qt configured with OpenGL")
++!contains(QT_CONFIG, egl): error("wayland_egl support requires Qt configured with EGL")
+ 
+ !contains(QT_CONFIG, no-pkg-config) {
+     CONFIG += link_pkgconfig
+-- 
+1.8.4.2
+

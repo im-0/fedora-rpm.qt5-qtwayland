@@ -4,16 +4,17 @@
 Summary:        Qt5 - Wayland platform support and QtCompositor module
 Name:           qt5-%{qt_module}
 Version:        5.1.0
-Release:        0.4.20130826git3b0b90b%{?dist}
+Release:        0.4.20131120git8cd1a77%{?dist}
 # Full license texts are yet to be included upstream:
 # https://codereview.qt-project.org/65586
 License:        LGPLv2 with exceptions or GPLv3 with exceptions
 Url:            http://qt-project.org/wiki/QtWayland
 # git clone --no-checkout git://gitorious.org/qt/qtwayland.git
 # cd qtwayland/
-# git archive 3b0b90b --prefix=qtwayland/ |gzip >qtwayland.tar.gz
+# git archive 8cd1a77 --prefix=qtwayland/ |gzip >qtwayland.tar.gz
 Source0:        qtwayland.tar.gz
-Patch0:         0001-Plugin-API-version-5.2.patch
+Patch0:         0001-Wayland-EGL-QPA-Support-desktop-OpenGL-as-well.patch
+Patch1:         0001-Need-egl-for-egl.patch
 
 BuildRequires:  qt5-qtbase-devel >= 5.2
 BuildRequires:  qt5-qtbase-static >= 5.2
@@ -48,17 +49,22 @@ Requires:       qt5-qtbase-devel%{?_isa}
 %prep
 %setup -q -n %{qt_module}
 %patch0 -p1
+%patch1 -p1
 
 
 %build
-%{_qt5_qmake} CONFIG+=wayland-compositor
 (cd src/compositor; syncqt.pl -check-includes -module QtCompositor -version %{version} -outdir %{_builddir}/%{?buildsubdir})
-make %{?_smp_mflags}
+
+%{_qt5_qmake} -o gl/Makefile CONFIG+=wayland-compositor
+%{_qt5_qmake} -o nogl/Makefile QT_WAYLAND_GL_CONFIG=nogl
+make -C nogl %{?_smp_mflags}
+make -C gl %{?_smp_mflags}
 
 
 %install
-make install INSTALL_ROOT=%{buildroot}
-install -pm644 src/compositor/{wayland-wayland-server-protocol.h,qwayland-server-wayland.h} \
+make -C nogl install INSTALL_ROOT=%{buildroot}
+make -C gl install INSTALL_ROOT=%{buildroot}
+install -pm644 gl/src/compositor/{wayland-wayland-server-protocol.h,qwayland-server-wayland.h} \
         %{buildroot}%{_qt5_headerdir}/QtCompositor/%{version}/QtCompositor/private
 
 
