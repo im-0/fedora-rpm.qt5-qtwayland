@@ -4,7 +4,7 @@
 Summary:        Qt5 - Wayland platform support and QtCompositor module
 Name:           qt5-%{qt_module}
 Version:        5.1.0
-Release:        0.4.20131120git8cd1a77%{?dist}
+Release:        0.5.20131120git8cd1a77%{?dist}
 # Full license texts are yet to be included upstream:
 # https://codereview.qt-project.org/65586
 License:        LGPLv2 with exceptions or GPLv3 with exceptions
@@ -91,7 +91,10 @@ install -pm644 gl/src/compositor/{wayland-wayland-server-protocol.h,qwayland-ser
 
 
 %changelog
-* Fri Nov 22 2013 Lubomir Rintel <lkundrak@v3.sk> - 5.1.0-0.4.20131120git8cd1a77%
+* Sat Nov 23 2013 Lubomir Rintel <lkundrak@v3.sk> - 5.1.0-0.5.20131120git8cd1a77
+- Rebuild with EGL backend
+
+* Fri Nov 22 2013 Lubomir Rintel <lkundrak@v3.sk> - 5.1.0-0.4.20131120git8cd1a77
 - Rebase to a later snapshot, drop 5.2 ABI patch
 - Enable nogl backend
 
