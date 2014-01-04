@@ -4,17 +4,13 @@
 Summary:        Qt5 - Wayland platform support and QtCompositor module
 Name:           qt5-%{qt_module}
 Version:        5.1.0
-Release:        0.5.20131120git8cd1a77%{?dist}
-# Full license texts are yet to be included upstream:
-# https://codereview.qt-project.org/65586
+Release:        0.5.20131203git6b20dfe%{?dist}
 License:        LGPLv2 with exceptions or GPLv3 with exceptions
 Url:            http://qt-project.org/wiki/QtWayland
 # git clone --no-checkout git://gitorious.org/qt/qtwayland.git
 # cd qtwayland/
-# git archive 8cd1a77 --prefix=qtwayland/ |gzip >qtwayland.tar.gz
+# git archive 6b20dfe --prefix=qtwayland/ |gzip >qtwayland.tar.gz
 Source0:        qtwayland.tar.gz
-Patch0:         0001-Wayland-EGL-QPA-Support-desktop-OpenGL-as-well.patch
-Patch1:         0001-Need-egl-for-egl.patch
 
 BuildRequires:  qt5-qtbase-devel >= 5.2
 BuildRequires:  qt5-qtbase-static >= 5.2
@@ -48,8 +44,6 @@ Requires:       qt5-qtbase-devel%{?_isa}
 
 %prep
 %setup -q -n %{qt_module}
-%patch0 -p1
-%patch1 -p1
 
 
 %build
@@ -77,6 +71,8 @@ install -pm644 gl/src/compositor/{wayland-wayland-server-protocol.h,qwayland-ser
 %{_qt5_plugindir}/waylandcompositors
 %{_qt5_libdir}/libQt5Compositor.so.5*
 %doc README
+%doc LICENSE.FDL LICENSE.LGPL LICENSE.GPL
+%doc LGPL_EXCEPTION.txt
 
 
 %files devel
@@ -91,6 +87,13 @@ install -pm644 gl/src/compositor/{wayland-wayland-server-protocol.h,qwayland-ser
 
 
 %changelog
+* Sat Jan 04 2014 Lubomir Rintel <lkundrak@v3.sk> - 5.1.0-0.5.20131203git6b20dfe
+- A newer snapshot
+
+* Mon Nov 25 2013 Lubomir Rintel <lkundrak@v3.sk> - 5.1.0-0.5.20131125git4f5985c
+- Rebase to a later snapshot, drop our patches
+- Add license texts
+
 * Sat Nov 23 2013 Lubomir Rintel <lkundrak@v3.sk> - 5.1.0-0.5.20131120git8cd1a77
 - Rebuild with EGL backend
 
