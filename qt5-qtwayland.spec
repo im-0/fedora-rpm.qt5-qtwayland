@@ -4,7 +4,7 @@
 Summary:        Qt5 - Wayland platform support and QtCompositor module
 Name:           qt5-%{qt_module}
 Version:        5.1.0
-Release:        0.5.20131203git6b20dfe%{?dist}
+Release:        0.6.20131203git6b20dfe%{?dist}
 License:        LGPLv2 with exceptions or GPLv3 with exceptions
 Url:            http://qt-project.org/wiki/QtWayland
 # git clone --no-checkout git://gitorious.org/qt/qtwayland.git
@@ -14,6 +14,7 @@ Source0:        qtwayland.tar.gz
 
 BuildRequires:  qt5-qtbase-devel >= 5.2
 BuildRequires:  qt5-qtbase-static >= 5.2
+BuildRequires:  qt5-qtdeclarative-devel
 BuildRequires:  pkgconfig(xkbcommon)
 BuildRequires:  pkgconfig(wayland-scanner)
 BuildRequires:  pkgconfig(wayland-server)
@@ -87,6 +88,9 @@ install -pm644 gl/src/compositor/{wayland-wayland-server-protocol.h,qwayland-ser
 
 
 %changelog
+* Sat Jan 04 2014 Lubomir Rintel <lkundrak@v3.sk> - 5.1.0-0.6.20131203git6b20dfe
+- Enable QtQuick compositor
+
 * Sat Jan 04 2014 Lubomir Rintel <lkundrak@v3.sk> - 5.1.0-0.5.20131203git6b20dfe
 - A newer snapshot
 
