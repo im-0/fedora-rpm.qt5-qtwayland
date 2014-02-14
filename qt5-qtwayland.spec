@@ -3,14 +3,15 @@
 
 Summary:        Qt5 - Wayland platform support and QtCompositor module
 Name:           qt5-%{qt_module}
-Version:        5.1.0
-Release:        0.6.20131203git6b20dfe%{?dist}
+Version:        5.2.1
+Release:        0.6.20140202git6d038fb%{?dist}
 License:        LGPLv2 with exceptions or GPLv3 with exceptions
 Url:            http://qt-project.org/wiki/QtWayland
 # git clone --no-checkout git://gitorious.org/qt/qtwayland.git
 # cd qtwayland/
-# git archive 6b20dfe --prefix=qtwayland/ |gzip >qtwayland.tar.gz
+# git archive 6d038fb --prefix=qtwayland/ |gzip >qtwayland.tar.gz
 Source0:        qtwayland.tar.gz
+Patch0:         0001-Disable-stuff-that-does-not-build-with-desktop-gl.patch
 
 BuildRequires:  qt5-qtbase-devel >= 5.2
 BuildRequires:  qt5-qtbase-static >= 5.2
@@ -27,6 +28,7 @@ BuildRequires:  pkgconfig(glesv2)
 BuildRequires:  pkgconfig(xcomposite)
 BuildRequires:  pkgconfig(xrender)
 BuildRequires:  pkgconfig(libudev)
+BuildRequires:  git
 
 %{?_qt5_version:Requires: qt5-qtbase%{?_isa} >= %{_qt5_version}}
 
@@ -43,12 +45,23 @@ Requires:       qt5-qtbase-devel%{?_isa}
 %{summary}.
 
 
+%package examples
+Summary:        Examples for %{name}
+Requires:       %{name}%{?_isa} = %{version}-%{release}
+
+%description examples
+%{summary}.
+
+
 %prep
 %setup -q -n %{qt_module}
+%patch0 -p1
 
 
 %build
-(cd src/compositor; syncqt.pl -check-includes -module QtCompositor -version %{version} -outdir %{_builddir}/%{?buildsubdir})
+# Presence of repository tricks qmake into invoking syncqt for us with
+# correct arguments at make time.
+git init
 
 %{_qt5_qmake} -o gl/Makefile CONFIG+=wayland-compositor
 %{_qt5_qmake} -o nogl/Makefile QT_WAYLAND_GL_CONFIG=nogl
@@ -59,7 +72,7 @@ make -C gl %{?_smp_mflags}
 %install
 make -C nogl install INSTALL_ROOT=%{buildroot}
 make -C gl install INSTALL_ROOT=%{buildroot}
-install -pm644 gl/src/compositor/{wayland-wayland-server-protocol.h,qwayland-server-wayland.h} \
+install -pm644 gl/include/QtCompositor/%{version}/QtCompositor/private/{wayland-wayland-server-protocol.h,qwayland-server-wayland.h} \
         %{buildroot}%{_qt5_headerdir}/QtCompositor/%{version}/QtCompositor/private
 
 
@@ -69,8 +82,8 @@ install -pm644 gl/src/compositor/{wayland-wayland-server-protocol.h,qwayland-ser
 
 %files
 %{_qt5_plugindir}/platforms
-%{_qt5_plugindir}/waylandcompositors
-%{_qt5_libdir}/libQt5Compositor.so.5*
+%{_qt5_plugindir}/wayland-graphics-integration
+%{_qt5_libdir}/libQt5*.so.5*
 %doc README
 %doc LICENSE.FDL LICENSE.LGPL LICENSE.GPL
 %doc LGPL_EXCEPTION.txt
@@ -84,10 +97,18 @@ install -pm644 gl/src/compositor/{wayland-wayland-server-protocol.h,qwayland-ser
 %{_qt5_libdir}/cmake/Qt5*/
 %{_qt5_libdir}/pkgconfig/Qt5*.pc
 %{_qt5_archdatadir}/mkspecs/modules/*.pri
-%exclude %{_qt5_libdir}/libQt5Compositor.la
+%exclude %{_qt5_libdir}/libQt5*.la
+
+
+%files examples
+%{_qt5_examplesdir}
 
 
 %changelog
+* Fri Feb 14 2014 Lubomir Rintel <lkundrak@v3.sk> - 5.1.0-0.6.20140202git6d038fb
+- A more recent snapshot
+- Disable xcomposite compositor until it builds
+
 * Sat Jan 04 2014 Lubomir Rintel <lkundrak@v3.sk> - 5.1.0-0.6.20131203git6b20dfe
 - Enable QtQuick compositor
 
