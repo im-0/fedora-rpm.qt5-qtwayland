@@ -3,13 +3,13 @@
 
 Summary:        Qt5 - Wayland platform support and QtCompositor module
 Name:           qt5-%{qt_module}
-Version:        5.2.1
-Release:        0.6.20140202git6d038fb%{?dist}
+Version:        5.3.0
+Release:        0.1.20140529git98dca3b%{?dist}
 License:        LGPLv2 with exceptions or GPLv3 with exceptions
 Url:            http://qt-project.org/wiki/QtWayland
 # git clone --no-checkout git://gitorious.org/qt/qtwayland.git
 # cd qtwayland/
-# git archive 6d038fb --prefix=qtwayland/ |gzip >qtwayland.tar.gz
+# git archive 98dca3b --prefix=qtwayland/ |gzip >qtwayland.tar.gz
 Source0:        qtwayland.tar.gz
 Patch0:         0001-Disable-stuff-that-does-not-build-with-desktop-gl.patch
 
@@ -82,7 +82,8 @@ install -pm644 gl/include/QtCompositor/%{version}/QtCompositor/private/{wayland-
 
 %files
 %{_qt5_plugindir}/platforms
-%{_qt5_plugindir}/wayland-graphics-integration
+%{_qt5_plugindir}/wayland-graphics-integration-server
+%{_qt5_plugindir}/wayland-graphics-integration-client
 %{_qt5_libdir}/libQt5*.so.5*
 %doc README
 %doc LICENSE.FDL LICENSE.LGPL LICENSE.GPL
@@ -105,6 +106,9 @@ install -pm644 gl/include/QtCompositor/%{version}/QtCompositor/private/{wayland-
 
 
 %changelog
+* Tue May 27 2014 Lubomir Rintel <lkundrak@v3.sk> - 5.3.0-0.1.20140529git98dca3b
+- Update and rebuild for Qt 5.3
+
 * Fri Feb 14 2014 Lubomir Rintel <lkundrak@v3.sk> - 5.1.0-0.6.20140202git6d038fb
 - A more recent snapshot
 - Disable xcomposite compositor until it builds
