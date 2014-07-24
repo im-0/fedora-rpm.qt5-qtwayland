@@ -4,14 +4,13 @@
 Summary:        Qt5 - Wayland platform support and QtCompositor module
 Name:           qt5-%{qt_module}
 Version:        5.3.0
-Release:        0.2.20140529git98dca3b%{?dist}
+Release:        0.2.20140723git02c499c%{?dist}
 License:        LGPLv2 with exceptions or GPLv3 with exceptions
 Url:            http://qt-project.org/wiki/QtWayland
 # git clone --no-checkout git://gitorious.org/qt/qtwayland.git
 # cd qtwayland/
-# git archive 98dca3b --prefix=qtwayland/ |gzip >qtwayland.tar.gz
+# git archive 02c499c --prefix=qtwayland/ |gzip >qtwayland.tar.gz
 Source0:        qtwayland.tar.gz
-Patch0:         0001-Disable-stuff-that-does-not-build-with-desktop-gl.patch
 
 BuildRequires:  qt5-qtbase-devel >= 5.2
 BuildRequires:  qt5-qtbase-static >= 5.2
@@ -55,7 +54,6 @@ Requires:       %{name}%{?_isa} = %{version}-%{release}
 
 %prep
 %setup -q -n %{qt_module}
-%patch0 -p1
 
 
 %build
@@ -106,6 +104,9 @@ install -pm644 gl/include/QtCompositor/%{version}/QtCompositor/private/{wayland-
 
 
 %changelog
+* Thu Jul 24 2014 Lubomir Rintel <lkundrak@v3.sk> - 5.3.0-0.2.20140723git02c499c
+- Update
+
 * Sun Jun 08 2014 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 5.3.0-0.2.20140529git98dca3b
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_21_Mass_Rebuild
 
