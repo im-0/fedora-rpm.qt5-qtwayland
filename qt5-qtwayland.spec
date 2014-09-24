@@ -1,16 +1,15 @@
 
 %global qt_module qtwayland
 
+%define pre alpha
+
 Summary:        Qt5 - Wayland platform support and QtCompositor module
 Name:           qt5-%{qt_module}
-Version:        5.3.0
-Release:        0.3.20140723git02c499c%{?dist}
+Version:        5.4.0
+Release:        0.%{pre}%{?dist}
 License:        LGPLv2 with exceptions or GPLv3 with exceptions
 Url:            http://qt-project.org/wiki/QtWayland
-# git clone --no-checkout git://gitorious.org/qt/qtwayland.git
-# cd qtwayland/
-# git archive 02c499c --prefix=qtwayland/ |gzip >qtwayland.tar.gz
-Source0:        qtwayland.tar.gz
+Source0:        http://download.qt-project.org/development_releases/qt/5.4/%{version}-%{pre}/submodules/%{qt_module}-opensource-src-%{version}%{?pre:-%{pre}}.tar.xz
 
 BuildRequires:  qt5-qtbase-devel >= 5.2
 BuildRequires:  qt5-qtbase-static >= 5.2
@@ -53,7 +52,7 @@ Requires:       %{name}%{?_isa} = %{version}-%{release}
 
 
 %prep
-%setup -q -n %{qt_module}
+%setup -q -n %{qt_module}-opensource-src-%{version}%{?pre:-%{pre}}
 
 
 %build
@@ -104,6 +103,9 @@ install -pm644 gl/include/QtCompositor/%{version}/QtCompositor/private/{wayland-
 
 
 %changelog
+* Wed Sep 24 2014 Lubomir Rintel <lkundrak@v3.sk> - 5.4.0-0.alpha1
+- Switch from a Git snapshot to a pre-release tarball
+
 * Sun Aug 17 2014 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 5.3.0-0.3.20140723git02c499c
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_21_22_Mass_Rebuild
 
