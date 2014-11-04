@@ -4,12 +4,12 @@
 # build support for non-egl platforms
 %define nogl 1
 
-%define pre beta 
+%define pre beta
 
 Summary:        Qt5 - Wayland platform support and QtCompositor module
 Name:           qt5-%{qt_module}
 Version:        5.4.0
-Release:        0.1.%{pre}%{?dist}
+Release:        0.2.%{pre}%{?dist}
 License:        LGPLv2 with exceptions or GPLv3 with exceptions
 Url:            http://qt-project.org/wiki/QtWayland
 %if 0%{?pre:1}
@@ -70,7 +70,7 @@ mkdir .git
 # build support for non-egl platforms
 mkdir nogl
 pushd nogl
-%{_qt5_qmake} QT_WAYLAND_GL_CONFIG=nogl ..
+%{qmake_qt5} QT_WAYLAND_GL_CONFIG=nogl ..
 popd
 make %{?_smp_mflags} -C nogl
 %endif
@@ -145,6 +145,9 @@ install -pm644 \
 
 
 %changelog
+* Mon Nov 03 2014 Rex Dieter <rdieter@fedoraproject.org> 5.4.0-0.2.beta
+- use %%qmake_qt5 macro
+
 * Mon Oct 20 2014 Rex Dieter <rdieter@fedoraproject.org> 5.4.0-0.1.beta 
 - 5.4.0-beta
 
