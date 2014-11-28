@@ -4,12 +4,12 @@
 # build support for non-egl platforms
 %define nogl 1
 
-%define pre beta
+%define pre rc
 
 Summary:        Qt5 - Wayland platform support and QtCompositor module
 Name:           qt5-%{qt_module}
 Version:        5.4.0
-Release:        0.2.%{pre}%{?dist}
+Release:        0.3.%{pre}%{?dist}
 License:        LGPLv2 with exceptions or GPLv3 with exceptions
 Url:            http://qt-project.org/wiki/QtWayland
 %if 0%{?pre:1}
@@ -145,6 +145,9 @@ install -pm644 \
 
 
 %changelog
+* Fri Nov 28 2014 Rex Dieter <rdieter@fedoraproject.org> 5.4.0-0.3.rc
+- 5.4.0-rc
+
 * Mon Nov 03 2014 Rex Dieter <rdieter@fedoraproject.org> 5.4.0-0.2.beta
 - use %%qmake_qt5 macro
 
