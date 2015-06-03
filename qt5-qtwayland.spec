@@ -6,8 +6,8 @@
 
 Summary:        Qt5 - Wayland platform support and QtCompositor module
 Name:           qt5-%{qt_module}
-Version:        5.4.1
-Release:        2%{?dist}
+Version:        5.4.2
+Release:        1%{?dist}
 License:        LGPLv2 with exceptions or GPLv3 with exceptions
 Url:            http://qt-project.org/wiki/QtWayland
 %if 0%{?pre:1}
@@ -143,6 +143,9 @@ install -pm644 \
 
 
 %changelog
+* Wed Jun 03 2015 Jan Grulich <jgrulich@redhat.com> - 5.4.2-1
+- 5.4.2
+
 * Sat May 02 2015 Kalev Lember <kalevlember@gmail.com> - 5.4.1-2
 - Rebuilt for GCC 5 C++11 ABI change
 
