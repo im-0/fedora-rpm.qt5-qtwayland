@@ -9,7 +9,7 @@
 Summary:        Qt5 - Wayland platform support and QtCompositor module
 Name:           qt5-%{qt_module}
 Version:        5.5.0
-Release: 1%{?dist}
+Release: 2%{?dist}
 License:        LGPLv2 with exceptions or LGPLv3 with exceptions
 Url:            http://www.qt.io
 Source0: http://download.qt.io/official_releases/qt/5.5/%{version}%{?prerelease:-%{prerelease}}/submodules/%{qt_module}-opensource-src-%{version}%{?prerelease:-%{prerelease}}.tar.xz
@@ -39,6 +39,7 @@ BuildRequires:  pkgconfig(libinput)
 %package devel
 Summary:        Development files for %{name}
 Requires:       %{name}%{?_isa} = %{version}-%{release}
+Requires:       pkgconfig(xkbcommon)
 Requires:       qt5-qtbase-devel%{?_isa}
 %description devel
 %{summary}.
@@ -131,6 +132,9 @@ install -pm644 \
 
 
 %changelog
+* Sun Jul 05 2015 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com> - 5.5.0-2
+- Add xkbcommon to the devel package.
+
 * Thu Jun 25 2015 Helio Chissini de Castro <helio@kde.org> - 5.5.0-0.2.rc
 - Update for official RC1 released packages
 
