@@ -9,7 +9,7 @@
 Summary:        Qt5 - Wayland platform support and QtCompositor module
 Name:           qt5-%{qt_module}
 Version:        5.5.0
-Release: 2%{?dist}
+Release:        3%{?dist}
 License:        LGPLv2 with exceptions or LGPLv3 with exceptions
 Url:            http://www.qt.io
 Source0: http://download.qt.io/official_releases/qt/5.5/%{version}%{?prerelease:-%{prerelease}}/submodules/%{qt_module}-opensource-src-%{version}%{?prerelease:-%{prerelease}}.tar.xz
@@ -31,7 +31,7 @@ BuildRequires:  pkgconfig(xrender)
 BuildRequires:  pkgconfig(libudev)
 BuildRequires:  pkgconfig(libinput)
 
-%{?_qt5_version:Requires: qt5-qtbase%{?_isa} >= %{_qt5_version}}
+%{?_qt5:Requires: %{_qt5}%{?_isa} = %{_qt5_version}}
 
 %description
 %{summary}.
@@ -39,6 +39,7 @@ BuildRequires:  pkgconfig(libinput)
 %package devel
 Summary:        Development files for %{name}
 Requires:       %{name}%{?_isa} = %{version}-%{release}
+# why was this added explicitly?  auto-pkgconfig deps should pick this up -- rex
 Requires:       pkgconfig(xkbcommon)
 Requires:       qt5-qtbase-devel%{?_isa}
 %description devel
@@ -132,8 +133,14 @@ install -pm644 \
 
 
 %changelog
+* Thu Jul 16 2015 Rex Dieter <rdieter@fedoraproject.org> 5.5.0-3
+- tighten qtbase dep (#1233829)
+
 * Sun Jul 05 2015 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com> - 5.5.0-2
 - Add xkbcommon to the devel package.
+
+* Wed Jul 1 2015 Helio Chissini de Castro <helio@kde.org> 5.5.0-1
+- New final upstream release Qt 5.5.0
 
 * Thu Jun 25 2015 Helio Chissini de Castro <helio@kde.org> - 5.5.0-0.2.rc
 - Update for official RC1 released packages
