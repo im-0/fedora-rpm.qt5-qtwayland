@@ -4,7 +4,7 @@
 # build support for non-egl platforms
 %define nogl 1
 
-%define prerelease rc1
+## define prerelease rc1
 
 Summary:        Qt5 - Wayland platform support and QtCompositor module
 Name:           qt5-%{qt_module}
