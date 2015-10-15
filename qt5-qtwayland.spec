@@ -9,7 +9,7 @@
 Summary:        Qt5 - Wayland platform support and QtCompositor module
 Name:           qt5-%{qt_module}
 Version:        5.5.1
-Release:        1%{?dist}
+Release:        2%{?dist}
 License:        LGPLv2 with exceptions or LGPLv3 with exceptions
 Url:            http://www.qt.io
 Source0: http://download.qt.io/official_releases/qt/5.5/%{version}%{?prerelease:-%{prerelease}}/submodules/%{qt_module}-opensource-src-%{version}%{?prerelease:-%{prerelease}}.tar.xz
@@ -133,6 +133,9 @@ install -pm644 \
 
 
 %changelog
+* Thu Oct 15 2015 Helio Chissini de Castro <helio@kde.org> - 5.5.1-2
+- Update to final release 5.5.1
+
 * Tue Sep 29 2015 Helio Chissini de Castro <helio@kde.org> - 5.5.1-1
 - Update to Qt 5.5.1 RC1
 
