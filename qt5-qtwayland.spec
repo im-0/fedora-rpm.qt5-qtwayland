@@ -4,19 +4,19 @@
 # build support for non-egl platforms
 %define nogl 1
 
-## define prerelease rc1
+%define prerelease beta
 
 Summary:        Qt5 - Wayland platform support and QtCompositor module
 Name:           qt5-%{qt_module}
-Version:        5.5.1
+Version:        5.6.0
 Release:        2%{?dist}
 License:        LGPLv2 with exceptions or LGPLv3 with exceptions
 Url:            http://www.qt.io
-Source0: http://download.qt.io/official_releases/qt/5.5/%{version}%{?prerelease:-%{prerelease}}/submodules/%{qt_module}-opensource-src-%{version}%{?prerelease:-%{prerelease}}.tar.xz
+Source0: http://download.qt.io/official_releases/qt/5.5/%{version}%{?prerelease:-%{prerelease}}/submodules/%{qt_module}-opensource-src-%{version}%{?prerelease:-%{prerelease}}.tar.gz
 
 BuildRequires:  qt5-qtbase-devel >= %{version} 
 BuildRequires:  qt5-qtbase-static
-BuildRequires:  qt5-qtdeclarative-devel
+BuildRequires:  pkgconfig(Qt5Quick)
 BuildRequires:  pkgconfig(xkbcommon)
 BuildRequires:  pkgconfig(wayland-scanner)
 BuildRequires:  pkgconfig(wayland-server)
@@ -112,7 +112,7 @@ install -pm644 \
 %{_qt5_libdir}/cmake/Qt5Compositor/Qt5Compositor_*.cmake
 %{_qt5_libdir}/cmake/Qt5Gui/Qt5Gui_*.cmake
 %dir %{_qt5_libdir}/cmake/Qt5WaylandClient/
-%{_qt5_libdir}/cmake/Qt5WaylandClient/Qt5WaylandClient_*.cmake
+%{_qt5_libdir}/cmake/Qt5WaylandClient/*.cmake
 
 %files devel
 %{_qt5_bindir}/qtwaylandscanner
@@ -133,6 +133,12 @@ install -pm644 \
 
 
 %changelog
+* Thu Dec 10 2015 Helio Chissini de Castro <helio@kde.org> - 5.6.0-2
+- Official beta release
+
+* Tue Nov 03 2015 Helio Chissini de Castro <helio@kde.org> - 5.6.0-0.1
+- Start to implement 5.6.0 beta
+
 * Thu Oct 15 2015 Helio Chissini de Castro <helio@kde.org> - 5.5.1-2
 - Update to final release 5.5.1
 
