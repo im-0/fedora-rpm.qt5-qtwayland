@@ -4,18 +4,18 @@
 # build support for non-egl platforms
 %define nogl 1
 
-%define prerelease beta
+%define prerelease rc
 
 Summary:        Qt5 - Wayland platform support and QtCompositor module
 Name:           qt5-%{qt_module}
 Version:        5.6.0
-Release:        6.%{prerelease}%{?dist}
+Release:        7.%{prerelease}%{?dist}
 License:        LGPLv2 with exceptions or LGPLv3 with exceptions
 Url:            http://www.qt.io
 %if 0%{?prerelease:1}
-Source0: http://download.qt.io/development_releases/qt/5.6/%{version}-%{prerelease}/submodules/%{qt_module}-opensource-src-%{version}-%{prerelease}.tar.gz
+Source0: http://download.qt.io/development_releases/qt/5.6/%{version}-%{prerelease}/submodules/%{qt_module}-opensource-src-%{version}-%{prerelease}.tar.xz
 %else
-Source0: http://download.qt.io/official_releases/qt/5.6/%{version}/submodules/%{qt_module}-opensource-src-%{version}.tar.gz
+Source0: http://download.qt.io/official_releases/qt/5.6/%{version}/submodules/%{qt_module}-opensource-src-%{version}.tar.xz
 %endif
 
 BuildRequires:  cmake
@@ -138,23 +138,26 @@ install -pm644 \
 
 
 %changelog
-* Thu Feb 04 2016 Fedora Release Engineering <releng@fedoraproject.org> - 5.6.0-6.beta
+* Mon Feb 15 2016 Helio Chissini de Castro <helio@kde.org> - 5.6.0-7
+- Update RC release
+
+* Thu Feb 04 2016 Fedora Release Engineering <releng@fedoraproject.org> - 5.6.0-6.rc
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_24_Mass_Rebuild
 
-* Mon Feb 01 2016 Rex Dieter <rdieter@fedoraproject.org> 5.6.0-5.beta
+* Mon Feb 01 2016 Rex Dieter <rdieter@fedoraproject.org> 5.6.0-5.rc
 - use %%qmake_qt5 consistently
 
-* Mon Dec 28 2015 Rex Dieter <rdieter@fedoraproject.org> 5.6.0-4.beta
+* Mon Dec 28 2015 Rex Dieter <rdieter@fedoraproject.org> 5.6.0-4.rc
 - BR: cmake, update source URL, use %%license
 
 * Mon Dec 21 2015 Helio Chissini de Castro <helio@kde.org> - 5.6.0-3
-- Update to final beta release
+- Update to final rc release
 
 * Thu Dec 10 2015 Helio Chissini de Castro <helio@kde.org> - 5.6.0-2
-- Official beta release
+- Official rc release
 
 * Tue Nov 03 2015 Helio Chissini de Castro <helio@kde.org> - 5.6.0-0.1
-- Start to implement 5.6.0 beta
+- Start to implement 5.6.0 rc
 
 * Thu Oct 15 2015 Helio Chissini de Castro <helio@kde.org> - 5.5.1-2
 - Update to final release 5.5.1
@@ -192,11 +195,11 @@ install -pm644 \
 * Fri Nov 28 2014 Rex Dieter <rdieter@fedoraproject.org> 5.4.0-0.3.rc
 - 5.4.0-rc
 
-* Mon Nov 03 2014 Rex Dieter <rdieter@fedoraproject.org> 5.4.0-0.2.beta
+* Mon Nov 03 2014 Rex Dieter <rdieter@fedoraproject.org> 5.4.0-0.2.rc
 - use %%qmake_qt5 macro
 
-* Mon Oct 20 2014 Rex Dieter <rdieter@fedoraproject.org> 5.4.0-0.1.beta 
-- 5.4.0-beta
+* Mon Oct 20 2014 Rex Dieter <rdieter@fedoraproject.org> 5.4.0-0.1.rc 
+- 5.4.0-rc
 
 * Wed Sep 24 2014 Lubomir Rintel <lkundrak@v3.sk> - 5.4.0-0.alpha1
 - Switch from a Git snapshot to a pre-release tarball
