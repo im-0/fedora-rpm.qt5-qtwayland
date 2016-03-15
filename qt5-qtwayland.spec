@@ -9,7 +9,7 @@
 Summary:        Qt5 - Wayland platform support and QtCompositor module
 Name:           qt5-%{qt_module}
 Version:        5.6.0
-Release: 1%{?prerelease:.%{prerelease}}%{?dist}
+Release:        9%{?prerelease:.%{prerelease}}%{?dist}
 License:        LGPLv2 with exceptions or LGPLv3 with exceptions
 Url:            http://www.qt.io
 Source0: http://download.qt.io/snapshots/qt/5.6/%{version}%{?prerelease:-%{prerelease}}/submodules/%{qt_module}-opensource-src-%{version}%{?prerelease:-%{prerelease}}.tar.xz
@@ -134,6 +134,9 @@ install -pm644 \
 
 
 %changelog
+* Tue Mar 15 2016 Peter Robinson <pbrobinson@fedoraproject.org> 5.6.0-9
+- Bump release to 9 so it's higher than the final RC
+
 * Mon Mar 14 2016 Helio Chissini de Castro <helio@kde.org> - 5.6.0-1
 - 5.6.0 final release
 
