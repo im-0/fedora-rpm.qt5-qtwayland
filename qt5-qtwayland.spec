@@ -8,14 +8,14 @@
 
 Summary:        Qt5 - Wayland platform support and QtCompositor module
 Name:           qt5-%{qt_module}
-Version:        5.6.0
-Release:        11%{?prerelease:.%{prerelease}}%{?dist}
+Version:        5.6.1
+Release:        1%{?prerelease:.%{prerelease}}%{?dist}
 License:        LGPLv2 with exceptions or LGPLv3 with exceptions
 Url:            http://www.qt.io
 Source0: http://download.qt.io/snapshots/qt/5.6/%{version}%{?prerelease:-%{prerelease}}/submodules/%{qt_module}-opensource-src-%{version}%{?prerelease:-%{prerelease}}.tar.xz
 
 BuildRequires:  cmake
-BuildRequires:  qt5-qtbase-devel >= %{version} 
+BuildRequires:  qt5-qtbase-devel >= %{version}
 BuildRequires:  qt5-qtbase-static
 BuildRequires:  pkgconfig(Qt5Quick)
 BuildRequires:  pkgconfig(xkbcommon)
@@ -88,7 +88,7 @@ done
 popd
 
 
-# install private headers... needed by hawaii shell 
+# install private headers... needed by hawaii shell
 install -pm644 \
   include/QtCompositor/%{version}/QtCompositor/private/{wayland-wayland-server-protocol.h,qwayland-server-wayland.h} \
   %{buildroot}%{_qt5_headerdir}/QtCompositor/%{version}/QtCompositor/private/
@@ -134,6 +134,9 @@ install -pm644 \
 
 
 %changelog
+* Thu Jun 09 2016 Jan Grulich <jgrulich@redhat.com> - 5.6.1-1
+- Update to 5.6.1
+
 * Mon Mar 21 2016 Rex Dieter <rdieter@fedoraproject.org> - 5.6.0-11
 - rebuild
 
@@ -209,7 +212,7 @@ install -pm644 \
 * Mon Nov 03 2014 Rex Dieter <rdieter@fedoraproject.org> 5.4.0-0.2.rc
 - use %%qmake_qt5 macro
 
-* Mon Oct 20 2014 Rex Dieter <rdieter@fedoraproject.org> 5.4.0-0.1.rc 
+* Mon Oct 20 2014 Rex Dieter <rdieter@fedoraproject.org> 5.4.0-0.1.rc
 - 5.4.0-rc
 
 * Wed Sep 24 2014 Lubomir Rintel <lkundrak@v3.sk> - 5.4.0-0.alpha1
