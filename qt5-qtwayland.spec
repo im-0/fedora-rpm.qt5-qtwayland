@@ -1,18 +1,14 @@
-
 %global qt_module qtwayland
-
-# build support for non-egl platforms
-%define nogl 1
 
 #define prerelease
 
 Summary:        Qt5 - Wayland platform support and QtCompositor module
 Name:           qt5-%{qt_module}
-Version:        5.6.1
-Release:        1%{?prerelease:.%{prerelease}}%{?dist}
+Version: 5.7.0
+Release: 2%{?dist}
 License:        LGPLv2 with exceptions or LGPLv3 with exceptions
 Url:            http://www.qt.io
-Source0: http://download.qt.io/snapshots/qt/5.6/%{version}%{?prerelease:-%{prerelease}}/submodules/%{qt_module}-opensource-src-%{version}%{?prerelease:-%{prerelease}}.tar.xz
+Source0: http://download.qt.io/official_releases/qt/5.7/%{version}%{?prerelease:-%{prerelease}}/submodules/%{qt_module}-opensource-src-%{version}%{?prerelease:-%{prerelease}}.tar.xz
 
 BuildRequires:  cmake
 BuildRequires:  qt5-qtbase-devel >= %{version}
@@ -57,22 +53,10 @@ Requires:       %{name}%{?_isa} = %{version}-%{release}
 %setup -q -n %{qt_module}-opensource-src-%{version}%{?prerelease:-%{prerelease}}
 
 %build
-%if 0%{?nogl}
-# build support for non-egl platforms
-mkdir nogl
-pushd nogl
-%{qmake_qt5} QT_WAYLAND_GL_CONFIG=nogl ..
-popd
-make %{?_smp_mflags} -C nogl
-%endif
-
-%{qmake_qt5} CONFIG+=wayland-compositor
+%{qmake_qt5}
 make %{?_smp_mflags}
 
 %install
-%if 0%{?nogl}
-make install INSTALL_ROOT=%{buildroot} -C nogl/
-%endif
 make install INSTALL_ROOT=%{buildroot}
 
 ## .prl/.la file love
@@ -88,52 +72,57 @@ done
 popd
 
 
-# install private headers... needed by hawaii shell
-install -pm644 \
-  include/QtCompositor/%{version}/QtCompositor/private/{wayland-wayland-server-protocol.h,qwayland-server-wayland.h} \
-  %{buildroot}%{_qt5_headerdir}/QtCompositor/%{version}/QtCompositor/private/
-
 %post -p /sbin/ldconfig
 %postun -p /sbin/ldconfig
 
 %files
 %doc README
 %license LICENSE.LGPL* LGPL_EXCEPTION.txt
-%{_qt5_libdir}/libQt5Compositor.so.5*
+%{_qt5_libdir}/libQt5WaylandCompositor.so.5*
 %{_qt5_libdir}/libQt5WaylandClient.so.5*
 %dir %{_qt5_plugindir}/wayland-decoration-client/
-%{_qt5_plugindir}/wayland-decoration-client/libbradient.so
+%{_qt5_plugindir}/wayland-decoration-client
 %{_qt5_plugindir}/wayland-graphics-integration-server
 %{_qt5_plugindir}/wayland-graphics-integration-client
+%{_qt5_plugindir}/wayland-shell-integration
 %{_qt5_plugindir}/platforms/libqwayland-egl.so
 %{_qt5_plugindir}/platforms/libqwayland-generic.so
 %{_qt5_plugindir}/platforms/libqwayland-xcomposite-egl.so
 %{_qt5_plugindir}/platforms/libqwayland-xcomposite-glx.so
-%dir %{_qt5_libdir}/cmake/Qt5Compositor/
-%{_qt5_libdir}/cmake/Qt5Compositor/Qt5Compositor_*.cmake
+%{_qt5_plugindir}/platforms/libcustom-wayland.so
+%dir %{_qt5_qmldir}/QtWayland
+%{_qt5_qmldir}/QtWayland/*
+
+%files devel
+%{_qt5_bindir}/qtwaylandscanner
+%{_qt5_headerdir}/QtWaylandCompositor/
+%{_qt5_headerdir}/QtWaylandClient/
+%{_qt5_libdir}/libQt5WaylandCompositor.so
+%{_qt5_libdir}/libQt5WaylandClient.so
+%{_qt5_libdir}/libQt5WaylandCompositor.prl
+%{_qt5_libdir}/libQt5WaylandClient.prl
+%{_qt5_libdir}/cmake/Qt5WaylandCompositor/Qt5WaylandCompositorConfig*.cmake
+%{_qt5_libdir}/pkgconfig/*.pc
+%{_qt5_archdatadir}/mkspecs/modules/*.pri
+%dir %{_qt5_libdir}/cmake/Qt5WaylandCompositor/
+%{_qt5_libdir}/cmake/Qt5WaylandCompositor/Qt5WaylandCompositor_*.cmake
 %{_qt5_libdir}/cmake/Qt5Gui/Qt5Gui_*.cmake
 %dir %{_qt5_libdir}/cmake/Qt5WaylandClient/
 %{_qt5_libdir}/cmake/Qt5WaylandClient/*.cmake
 
-%files devel
-%{_qt5_bindir}/qtwaylandscanner
-%{_qt5_headerdir}/QtCompositor/
-%{_qt5_headerdir}/QtWaylandClient/
-%{_qt5_libdir}/libQt5Compositor.so
-%{_qt5_libdir}/libQt5WaylandClient.so
-%{_qt5_libdir}/libQt5Compositor.prl
-%{_qt5_libdir}/libQt5WaylandClient.prl
-%{_qt5_libdir}/cmake/Qt5Compositor/Qt5CompositorConfig*.cmake
-%{_qt5_libdir}/pkgconfig/Qt5Compositor.pc
-%{_qt5_libdir}/pkgconfig/Qt5WaylandClient.pc
-%{_qt5_archdatadir}/mkspecs/modules/qt_lib_compositor*.pri
-%{_qt5_archdatadir}/mkspecs/modules/qt_lib_waylandclient*.pri
+
 
 %files examples
 %{_qt5_examplesdir}/wayland/
 
 
 %changelog
+* Mon Jul 04 2016 Helio Chissini de Castro <helio@kde.org> - 5.7.0-2
+- Compiled with gcc
+
+* Wed Jun 15 2016 Helio Chissini de Castro <helio@kde.org> - 5.7.0-1
+- Qt 5.7.0 release
+
 * Thu Jun 09 2016 Jan Grulich <jgrulich@redhat.com> - 5.6.1-1
 - Update to 5.6.1
 
