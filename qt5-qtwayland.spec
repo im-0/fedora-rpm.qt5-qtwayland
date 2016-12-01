@@ -1,14 +1,12 @@
 %global qt_module qtwayland
 
-#define prerelease
-
 Summary:        Qt5 - Wayland platform support and QtCompositor module
 Name:           qt5-%{qt_module}
-Version: 5.7.0
-Release: 2%{?dist}
-License:        LGPLv2 with exceptions or LGPLv3 with exceptions
-Url:            http://www.qt.io
-Source0: http://download.qt.io/official_releases/qt/5.7/%{version}%{?prerelease:-%{prerelease}}/submodules/%{qt_module}-opensource-src-%{version}%{?prerelease:-%{prerelease}}.tar.xz
+Version: 5.7.1
+Release: 1%{?dist}
+License: LGPLv2 with exceptions or LGPLv3 with exceptions
+Url: http://www.qt.io
+Source0: http://download.qt.io/official_releases/qt/5.7/%{version}/submodules/%{qt_module}-opensource-src-%{version}.tar.xz
 
 BuildRequires:  cmake
 BuildRequires:  qt5-qtbase-devel >= %{version}
@@ -50,7 +48,7 @@ Requires:       %{name}%{?_isa} = %{version}-%{release}
 
 
 %prep
-%setup -q -n %{qt_module}-opensource-src-%{version}%{?prerelease:-%{prerelease}}
+%setup -q -n %{qt_module}-opensource-src-%{version}
 
 %build
 %{qmake_qt5}
@@ -117,6 +115,9 @@ popd
 
 
 %changelog
+* Wed Nov 09 2016 Helio Chissini de Castro <helio@kde.org> - 5.7.1-1
+- New upstream version
+
 * Mon Jul 04 2016 Helio Chissini de Castro <helio@kde.org> - 5.7.0-2
 - Compiled with gcc
 
