@@ -1,14 +1,13 @@
 %global qt_module qtwayland
 
-Summary:        Qt5 - Wayland platform support and QtCompositor module
-Name:           qt5-%{qt_module}
+Summary: Qt5 - Wayland platform support and QtCompositor module
+Name:    qt5-%{qt_module}
 Version: 5.7.1
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: LGPLv2 with exceptions or LGPLv3 with exceptions
 Url: http://www.qt.io
 Source0: http://download.qt.io/official_releases/qt/5.7/%{version}/submodules/%{qt_module}-opensource-src-%{version}.tar.xz
 
-BuildRequires:  cmake
 BuildRequires:  qt5-qtbase-devel >= %{version}
 BuildRequires:  qt5-qtbase-static
 BuildRequires:  pkgconfig(Qt5Quick)
@@ -108,13 +107,15 @@ popd
 %dir %{_qt5_libdir}/cmake/Qt5WaylandClient/
 %{_qt5_libdir}/cmake/Qt5WaylandClient/*.cmake
 
-
-
 %files examples
 %{_qt5_examplesdir}/wayland/
 
 
 %changelog
+* Sat Dec 10 2016 Rex Dieter <rdieter@fedoraproject.org> - 5.7.1-2
+- drop BR: cmake (handled by qt5-rpm-macros now)
+- 5.7.1 dec5 snapshot
+
 * Wed Nov 09 2016 Helio Chissini de Castro <helio@kde.org> - 5.7.1-1
 - New upstream version
 
