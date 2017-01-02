@@ -3,13 +3,18 @@
 Summary: Qt5 - Wayland platform support and QtCompositor module
 Name:    qt5-%{qt_module}
 Version: 5.7.1
-Release: 2%{?dist}
+Release: 3%{?dist}
+
 License: LGPLv2 with exceptions or LGPLv3 with exceptions
 Url: http://www.qt.io
 Source0: http://download.qt.io/official_releases/qt/5.7/%{version}/submodules/%{qt_module}-opensource-src-%{version}.tar.xz
 
+# filter qml provides
+%global __provides_exclude_from ^%{_qt5_archdatadir}/qml/.*\\.so$
+
 BuildRequires:  qt5-qtbase-devel >= %{version}
 BuildRequires:  qt5-qtbase-static
+BuildRequires:  qt5-qtdeclarative-devel
 BuildRequires:  pkgconfig(Qt5Quick)
 BuildRequires:  pkgconfig(xkbcommon)
 BuildRequires:  pkgconfig(wayland-scanner)
@@ -25,6 +30,7 @@ BuildRequires:  pkgconfig(xrender)
 BuildRequires:  pkgconfig(libudev)
 BuildRequires:  pkgconfig(libinput)
 
+BuildRequires: qt5-qtbase-private-devel
 %{?_qt5:Requires: %{_qt5}%{?_isa} = %{_qt5_version}}
 
 %description
@@ -112,6 +118,9 @@ popd
 
 
 %changelog
+* Mon Jan 02 2017 Rex Dieter <rdieter@math.unl.edu> - 5.7.1-3
+- filter qml provides, BR: qtbase-private-devel qtdeclarative explicitly
+
 * Sat Dec 10 2016 Rex Dieter <rdieter@fedoraproject.org> - 5.7.1-2
 - drop BR: cmake (handled by qt5-rpm-macros now)
 - 5.7.1 dec5 snapshot
