@@ -3,7 +3,7 @@
 Summary: Qt5 - Wayland platform support and QtCompositor module
 Name:    qt5-%{qt_module}
 Version: 5.7.1
-Release: 3%{?dist}
+Release: 4%{?dist}
 
 License: LGPLv2 with exceptions or LGPLv3 with exceptions
 Url: http://www.qt.io
@@ -118,6 +118,9 @@ popd
 
 
 %changelog
+* Sat Feb 11 2017 Fedora Release Engineering <releng@fedoraproject.org> - 5.7.1-4
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_26_Mass_Rebuild
+
 * Mon Jan 02 2017 Rex Dieter <rdieter@math.unl.edu> - 5.7.1-3
 - filter qml provides, BR: qtbase-private-devel qtdeclarative explicitly
 
