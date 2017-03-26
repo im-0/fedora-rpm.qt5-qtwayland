@@ -2,20 +2,20 @@
 
 Summary: Qt5 - Wayland platform support and QtCompositor module
 Name:    qt5-%{qt_module}
-Version: 5.7.1
-Release: 4%{?dist}
+Version: 5.8.0
+Release: 1%{?dist}
 
 License: LGPLv2 with exceptions or LGPLv3 with exceptions
 Url: http://www.qt.io
-Source0: http://download.qt.io/official_releases/qt/5.7/%{version}/submodules/%{qt_module}-opensource-src-%{version}.tar.xz
+Source0: http://download.qt.io/official_releases/qt/5.8/%{version}/submodules/%{qt_module}-opensource-src-%{version}.tar.xz
 
 # filter qml provides
 %global __provides_exclude_from ^%{_qt5_archdatadir}/qml/.*\\.so$
 
 BuildRequires:  qt5-qtbase-devel >= %{version}
 BuildRequires:  qt5-qtbase-static
-BuildRequires:  qt5-qtdeclarative-devel
 BuildRequires:  pkgconfig(Qt5Quick)
+BuildRequires:  pkgconfig(Qt5Qml)
 BuildRequires:  pkgconfig(xkbcommon)
 BuildRequires:  pkgconfig(wayland-scanner)
 BuildRequires:  pkgconfig(wayland-server)
@@ -29,7 +29,6 @@ BuildRequires:  pkgconfig(xcomposite)
 BuildRequires:  pkgconfig(xrender)
 BuildRequires:  pkgconfig(libudev)
 BuildRequires:  pkgconfig(libinput)
-
 BuildRequires: qt5-qtbase-private-devel
 %{?_qt5:Requires: %{_qt5}%{?_isa} = %{_qt5_version}}
 
@@ -37,20 +36,20 @@ BuildRequires: qt5-qtbase-private-devel
 %{summary}.
 
 %package devel
-Summary:        Development files for %{name}
-Requires:       %{name}%{?_isa} = %{version}-%{release}
+Summary: Development files for %{name}
+Requires: %{name}%{?_isa} = %{version}-%{release}
 # why was this added explicitly?  auto-pkgconfig deps should pick this up -- rex
-Requires:       pkgconfig(xkbcommon)
-Requires:       qt5-qtbase-devel%{?_isa}
+Requires: pkgconfig(xkbcommon)
+Requires: qt5-qtbase-devel%{?_isa}
 %description devel
 %{summary}.
 
 %package examples
-Summary:        Examples for %{name}
-Requires:       %{name}%{?_isa} = %{version}-%{release}
+Summary: Programming examples for %{name}
+BuildRequires: qt5-qtbase-doc
+Requires: %{name}%{?_isa} = %{version}-%{release}
 %description examples
 %{summary}.
-
 
 %prep
 %setup -q -n %{qt_module}-opensource-src-%{version}
@@ -74,7 +73,6 @@ for prl_file in libQt5*.prl ; do
 done
 popd
 
-
 %post -p /sbin/ldconfig
 %postun -p /sbin/ldconfig
 
@@ -92,7 +90,6 @@ popd
 %{_qt5_plugindir}/platforms/libqwayland-generic.so
 %{_qt5_plugindir}/platforms/libqwayland-xcomposite-egl.so
 %{_qt5_plugindir}/platforms/libqwayland-xcomposite-glx.so
-%{_qt5_plugindir}/platforms/libcustom-wayland.so
 %dir %{_qt5_qmldir}/QtWayland
 %{_qt5_qmldir}/QtWayland/*
 
@@ -116,11 +113,7 @@ popd
 %files examples
 %{_qt5_examplesdir}/wayland/
 
-
 %changelog
-* Sat Feb 11 2017 Fedora Release Engineering <releng@fedoraproject.org> - 5.7.1-4
-- Rebuilt for https://fedoraproject.org/wiki/Fedora_26_Mass_Rebuild
-
 * Mon Jan 02 2017 Rex Dieter <rdieter@math.unl.edu> - 5.7.1-3
 - filter qml provides, BR: qtbase-private-devel qtdeclarative explicitly
 
