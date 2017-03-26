@@ -114,6 +114,9 @@ popd
 %{_qt5_examplesdir}/wayland/
 
 %changelog
+* Mon Jan 30 2017 Helio Chissini de Castro <helio@kde.org> - 5.8.0-1
+- New upstream version
+
 * Mon Jan 02 2017 Rex Dieter <rdieter@math.unl.edu> - 5.7.1-3
 - filter qml provides, BR: qtbase-private-devel qtdeclarative explicitly
 
