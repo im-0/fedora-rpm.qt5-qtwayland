@@ -46,7 +46,6 @@ Requires: qt5-qtbase-devel%{?_isa}
 
 %package examples
 Summary: Programming examples for %{name}
-BuildRequires: qt5-qtbase-doc
 Requires: %{name}%{?_isa} = %{version}-%{release}
 %description examples
 %{summary}.
