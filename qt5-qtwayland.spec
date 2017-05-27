@@ -5,7 +5,7 @@ Name:    qt5-%{qt_module}
 Version: 5.9.0
 Release: 0.1.rc%{?dist}
 
-License: LGPLv2 with exceptions or LGPLv3 with exceptions
+License: LGPLv3
 Url: http://www.qt.io
 Source0: https://download.qt.io/development_releases/qt/5.9/%{version}-rc/submodules/%{qt_module}-opensource-src-%{version}-rc.tar.xz
 
@@ -77,7 +77,7 @@ popd
 
 %files
 %doc README
-%license LICENSE.LGPL* LGPL_EXCEPTION.txt
+%license LICENSE.LGPL*
 %{_qt5_libdir}/libQt5WaylandCompositor.so.5*
 %{_qt5_libdir}/libQt5WaylandClient.so.5*
 %dir %{_qt5_plugindir}/wayland-decoration-client/
@@ -113,9 +113,6 @@ popd
 %{_qt5_examplesdir}/wayland/
 
 %changelog
-* Fri May 26 2017 Helio Chissini de Castro <helio@kde.org> - 5.9.0-0.1.rc
-- Upstream Release Candidate retagged
-
 * Tue May 09 2017 Helio Chissini de Castro <helio@kde.org> - 5.9.0-0.beta.3
 - Upstream beta 3
 
