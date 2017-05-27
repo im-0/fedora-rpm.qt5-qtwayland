@@ -3,11 +3,11 @@
 Summary: Qt5 - Wayland platform support and QtCompositor module
 Name:    qt5-%{qt_module}
 Version: 5.9.0
-Release: 0.beta.3%{?dist}
+Release: 0.1.rc%{?dist}
 
 License: LGPLv2 with exceptions or LGPLv3 with exceptions
 Url: http://www.qt.io
-Source0: https://download.qt.io/development_releases/qt/5.9/%{version}-beta3/submodules/%{qt_module}-opensource-src-%{version}-beta3.tar.xz
+Source0: https://download.qt.io/development_releases/qt/5.9/%{version}-rc/submodules/%{qt_module}-opensource-src-%{version}-rc.tar.xz
 
 # filter qml provides
 %global __provides_exclude_from ^%{_qt5_archdatadir}/qml/.*\\.so$
@@ -51,7 +51,7 @@ Requires: %{name}%{?_isa} = %{version}-%{release}
 %{summary}.
 
 %prep
-%setup -q -n %{qt_module}-opensource-src-%{version}-beta3
+%setup -q -n %{qt_module}-opensource-src-%{version}-rc
 
 %build
 %{qmake_qt5}
@@ -113,6 +113,9 @@ popd
 %{_qt5_examplesdir}/wayland/
 
 %changelog
+* Fri May 26 2017 Helio Chissini de Castro <helio@kde.org> - 5.9.0-0.1.rc
+- Upstream Release Candidate retagged
+
 * Tue May 09 2017 Helio Chissini de Castro <helio@kde.org> - 5.9.0-0.beta.3
 - Upstream beta 3
 
