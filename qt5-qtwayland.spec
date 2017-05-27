@@ -113,6 +113,9 @@ popd
 %{_qt5_examplesdir}/wayland/
 
 %changelog
+* Fri May 26 2017 Helio Chissini de Castro <helio@kde.org> - 5.9.0-0.1.rc
+- Upstream Release Candidate retagged
+
 * Tue May 09 2017 Helio Chissini de Castro <helio@kde.org> - 5.9.0-0.beta.3
 - Upstream beta 3
 
