@@ -3,19 +3,21 @@
 Summary: Qt5 - Wayland platform support and QtCompositor module
 Name:    qt5-%{qt_module}
 Version: 5.9.0
-Release: 1%{?dist}
+Release: 2%{?dist}
 
 License: LGPLv3
-Url: http://www.qt.io
-Source0: https://download.qt.io/official_releases/qt/5.9/5.9.0/submodules/qtwayland-opensource-src-5.9.0.tar.xz
+Url:     http://www.qt.io
+Source0: https://download.qt.io/official_releases/qt/5.9/%{version}/submodules/%{qt_module}-opensource-src-%{version}.tar.xz
 
 # filter qml provides
 %global __provides_exclude_from ^%{_qt5_archdatadir}/qml/.*\\.so$
 
 BuildRequires:  qt5-qtbase-devel >= %{version}
 BuildRequires:  qt5-qtbase-static
-BuildRequires:  pkgconfig(Qt5Quick)
-BuildRequires:  pkgconfig(Qt5Qml)
+BuildRequires: qt5-qtbase-private-devel
+%{?_qt5:Requires: %{_qt5}%{?_isa} = %{_qt5_version}}
+BuildRequires:  qt5-qtdeclarative-devel
+
 BuildRequires:  pkgconfig(xkbcommon)
 BuildRequires:  pkgconfig(wayland-scanner)
 BuildRequires:  pkgconfig(wayland-server)
@@ -29,8 +31,6 @@ BuildRequires:  pkgconfig(xcomposite)
 BuildRequires:  pkgconfig(xrender)
 BuildRequires:  pkgconfig(libudev)
 BuildRequires:  pkgconfig(libinput)
-BuildRequires: qt5-qtbase-private-devel
-%{?_qt5:Requires: %{_qt5}%{?_isa} = %{_qt5_version}}
 
 %description
 %{summary}.
@@ -50,12 +50,15 @@ Requires: %{name}%{?_isa} = %{version}-%{release}
 %description examples
 %{summary}.
 
+
 %prep
 %setup -q -n %{qt_module}-opensource-src-%{version}
+
 
 %build
 %{qmake_qt5}
 make %{?_smp_mflags}
+
 
 %install
 make install INSTALL_ROOT=%{buildroot}
@@ -112,7 +115,11 @@ popd
 %files examples
 %{_qt5_examplesdir}/wayland/
 
+
 %changelog
+* Fri Jun 16 2017 Rex Dieter <rdieter@fedoraproject.org> - 5.9.0-2
+- .spec cosmetics, Source URL, refer to qt5- builddeps directly
+
 * Wed May 31 2017 Helio Chissini de Castro <helio@kde.org> - 5.9.0-1
 - Upstream official release
 
