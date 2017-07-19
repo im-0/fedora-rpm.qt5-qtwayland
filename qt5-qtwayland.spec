@@ -2,8 +2,8 @@
 
 Summary: Qt5 - Wayland platform support and QtCompositor module
 Name:    qt5-%{qt_module}
-Version: 5.9.0
-Release: 2%{?dist}
+Version: 5.9.1
+Release: 1%{?dist}
 
 License: LGPLv3
 Url:     http://www.qt.io
@@ -38,8 +38,6 @@ BuildRequires:  pkgconfig(libinput)
 %package devel
 Summary: Development files for %{name}
 Requires: %{name}%{?_isa} = %{version}-%{release}
-# why was this added explicitly?  auto-pkgconfig deps should pick this up -- rex
-Requires: pkgconfig(xkbcommon)
 Requires: qt5-qtbase-devel%{?_isa}
 %description devel
 %{summary}.
@@ -75,6 +73,7 @@ for prl_file in libQt5*.prl ; do
 done
 popd
 
+
 %post -p /sbin/ldconfig
 %postun -p /sbin/ldconfig
 
@@ -83,8 +82,7 @@ popd
 %license LICENSE.LGPL*
 %{_qt5_libdir}/libQt5WaylandCompositor.so.5*
 %{_qt5_libdir}/libQt5WaylandClient.so.5*
-%dir %{_qt5_plugindir}/wayland-decoration-client/
-%{_qt5_plugindir}/wayland-decoration-client
+%{_qt5_plugindir}/wayland-decoration-client/
 %{_qt5_plugindir}/wayland-graphics-integration-server
 %{_qt5_plugindir}/wayland-graphics-integration-client
 %{_qt5_plugindir}/wayland-shell-integration
@@ -92,8 +90,7 @@ popd
 %{_qt5_plugindir}/platforms/libqwayland-generic.so
 %{_qt5_plugindir}/platforms/libqwayland-xcomposite-egl.so
 %{_qt5_plugindir}/platforms/libqwayland-xcomposite-glx.so
-%dir %{_qt5_qmldir}/QtWayland
-%{_qt5_qmldir}/QtWayland/*
+%{_qt5_qmldir}/QtWayland/
 
 %files devel
 %{_qt5_bindir}/qtwaylandscanner
@@ -106,17 +103,18 @@ popd
 %{_qt5_libdir}/cmake/Qt5WaylandCompositor/Qt5WaylandCompositorConfig*.cmake
 %{_qt5_libdir}/pkgconfig/*.pc
 %{_qt5_archdatadir}/mkspecs/modules/*.pri
-%dir %{_qt5_libdir}/cmake/Qt5WaylandCompositor/
-%{_qt5_libdir}/cmake/Qt5WaylandCompositor/Qt5WaylandCompositor_*.cmake
+%{_qt5_libdir}/cmake/Qt5WaylandCompositor/
 %{_qt5_libdir}/cmake/Qt5Gui/Qt5Gui_*.cmake
-%dir %{_qt5_libdir}/cmake/Qt5WaylandClient/
-%{_qt5_libdir}/cmake/Qt5WaylandClient/*.cmake
+%{_qt5_libdir}/cmake/Qt5WaylandClient/
 
 %files examples
 %{_qt5_examplesdir}/wayland/
 
 
 %changelog
+* Wed Jul 19 2017 Rex Dieter <rdieter@fedoraproject.org> - 5.9.1-1
+- 5.9.1
+
 * Fri Jun 16 2017 Rex Dieter <rdieter@fedoraproject.org> - 5.9.0-2
 - .spec cosmetics, Source URL, refer to qt5- builddeps directly
 
