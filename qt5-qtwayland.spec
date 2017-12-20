@@ -2,12 +2,12 @@
 
 Summary: Qt5 - Wayland platform support and QtCompositor module
 Name:    qt5-%{qt_module}
-Version: 5.9.3
+Version: 5.10.0
 Release: 1%{?dist}
 
 License: LGPLv3
 Url:     http://www.qt.io
-Source0: https://download.qt.io/official_releases/qt/5.9/%{version}/submodules/%{qt_module}-opensource-src-%{version}.tar.xz
+Source0: https://download.qt.io/official_releases/qt/5.10/%{version}/submodules/%{qt_module}-everywhere-src-%{version}.tar.xz
 
 # filter qml provides
 %global __provides_exclude_from ^%{_qt5_archdatadir}/qml/.*\\.so$
@@ -50,7 +50,7 @@ Requires: %{name}%{?_isa} = %{version}-%{release}
 
 
 %prep
-%setup -q -n %{qt_module}-opensource-src-%{version}
+%setup -q -n %{qt_module}-everywhere-src-%{version}
 
 
 %build
@@ -112,6 +112,9 @@ popd
 
 
 %changelog
+* Tue Dec 19 2017 Jan Grulich <jgrulich@redhat.com> - 5.10.0-1
+- 5.10.0
+
 * Thu Nov 23 2017 Jan Grulich <jgrulich@redhat.com> - 5.9.3-1
 - 5.9.3
 
