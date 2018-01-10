@@ -3,11 +3,17 @@
 Summary: Qt5 - Wayland platform support and QtCompositor module
 Name:    qt5-%{qt_module}
 Version: 5.10.0
-Release: 1%{?dist}
+Release: 2%{?dist}
 
 License: LGPLv3
 Url:     http://www.qt.io
 Source0: https://download.qt.io/official_releases/qt/5.10/%{version}/submodules/%{qt_module}-everywhere-src-%{version}.tar.xz
+
+# Upstream patches
+
+# QTBUG-65553
+# https://codereview.qt-project.org/#/c/210552/
+Patch0:  qtwayland-do-not-recreate-hidden-egl-surfaces.patch
 
 # filter qml provides
 %global __provides_exclude_from ^%{_qt5_archdatadir}/qml/.*\\.so$
@@ -52,6 +58,7 @@ Requires: %{name}%{?_isa} = %{version}-%{release}
 %prep
 %setup -q -n %{qt_module}-everywhere-src-%{version}
 
+%patch0 -p1 -b .do-not-recreate-hidden-egl-surfaces
 
 %build
 %{qmake_qt5}
@@ -112,6 +119,10 @@ popd
 
 
 %changelog
+* Wed Jan 10 2018 Jan Grulich <jgrulich@redhat.com> - 5.10.0-2
+- Do not recreate hidden egl surfaces
+  QTBUG-65553
+
 * Tue Dec 19 2017 Jan Grulich <jgrulich@redhat.com> - 5.10.0-1
 - 5.10.0
 
