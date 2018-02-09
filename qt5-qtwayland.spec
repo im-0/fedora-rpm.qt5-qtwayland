@@ -3,7 +3,7 @@
 Summary: Qt5 - Wayland platform support and QtCompositor module
 Name:    qt5-%{qt_module}
 Version: 5.10.0
-Release: 2%{?dist}
+Release: 3%{?dist}
 
 License: LGPLv3
 Url:     http://www.qt.io
@@ -119,6 +119,9 @@ popd
 
 
 %changelog
+* Fri Feb 09 2018 Fedora Release Engineering <releng@fedoraproject.org> - 5.10.0-3
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_28_Mass_Rebuild
+
 * Wed Jan 10 2018 Jan Grulich <jgrulich@redhat.com> - 5.10.0-2
 - Do not recreate hidden egl surfaces
   QTBUG-65553
