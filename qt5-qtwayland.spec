@@ -3,13 +3,15 @@
 Summary: Qt5 - Wayland platform support and QtCompositor module
 Name:    qt5-%{qt_module}
 Version: 5.10.1
-Release: 1%{?dist}
+Release: 2%{?dist}
 
 License: LGPLv3
 Url:     http://www.qt.io
 Source0: https://download.qt.io/official_releases/qt/5.10/%{version}/submodules/%{qt_module}-everywhere-src-%{version}.tar.xz
 
 # Upstream patches
+# https://codereview.qt-project.org/#/c/222139/
+Patch0:  qtwayland-test-for-null-pointer-before-using-it.patch
 
 # filter qml provides
 %global __provides_exclude_from ^%{_qt5_archdatadir}/qml/.*\\.so$
@@ -53,6 +55,8 @@ Requires: %{name}%{?_isa} = %{version}-%{release}
 
 %prep
 %setup -q -n %{qt_module}-everywhere-src-%{version}
+
+%patch0 -p1 -b .test-for-null-pointer-before-using-it
 
 %build
 %{qmake_qt5}
@@ -113,6 +117,9 @@ popd
 
 
 %changelog
+* Tue Mar 13 2018 Jan Grulich <jgrulich@redhat.com> - 5.10.1-2
+- Do not crash when opening dialogs
+
 * Wed Feb 14 2018 Jan Grulich <jgrulich@redhat.com> - 5.10.1-1
 - 5.10.1
 
