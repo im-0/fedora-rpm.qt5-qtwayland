@@ -2,16 +2,13 @@
 
 Summary: Qt5 - Wayland platform support and QtCompositor module
 Name:    qt5-%{qt_module}
-Version: 5.10.1
-Release: 2%{?dist}
+Version: 5.11.0
+Release: 1%{?dist}
 
 License: LGPLv3
 Url:     http://www.qt.io
-Source0: https://download.qt.io/official_releases/qt/5.10/%{version}/submodules/%{qt_module}-everywhere-src-%{version}.tar.xz
-
-# Upstream patches
-# https://codereview.qt-project.org/#/c/222139/
-Patch0:  qtwayland-test-for-null-pointer-before-using-it.patch
+%global majmin %(echo %{version} | cut -d. -f1-2)
+Source0: https://download.qt.io/official_releases/qt/%{majmin}/%{version}/submodules/%{qt_module}-everywhere-src-%{version}.tar.xz
 
 # filter qml provides
 %global __provides_exclude_from ^%{_qt5_archdatadir}/qml/.*\\.so$
@@ -60,7 +57,8 @@ Requires: %{name}%{?_isa} = %{version}-%{release}
 
 %build
 %{qmake_qt5}
-make %{?_smp_mflags}
+
+%make_build
 
 
 %install
@@ -79,12 +77,11 @@ done
 popd
 
 
-%post -p /sbin/ldconfig
-%postun -p /sbin/ldconfig
+%ldconfig_scriptlets
 
 %files
 %doc README
-%license LICENSE.LGPL*
+%license LICENSE.*
 %{_qt5_libdir}/libQt5WaylandCompositor.so.5*
 %{_qt5_libdir}/libQt5WaylandClient.so.5*
 %{_qt5_plugindir}/wayland-decoration-client/
@@ -117,6 +114,10 @@ popd
 
 
 %changelog
+* Sun May 27 2018 Rex Dieter <rdieter@fedoraproject.org> - 5.11.0-1
+- 5.11.0
+- use %%make_build %%ldconfig_scriptlets
+
 * Tue Mar 13 2018 Jan Grulich <jgrulich@redhat.com> - 5.10.1-2
 - Do not crash when opening dialogs
 
