@@ -51,9 +51,8 @@ Requires: %{name}%{?_isa} = %{version}-%{release}
 
 
 %prep
-%setup -q -n %{qt_module}-everywhere-src-%{version}
+%autosetup -n %{qt_module}-everywhere-src-%{version} -p1
 
-%patch0 -p1 -b .test-for-null-pointer-before-using-it
 
 %build
 %{qmake_qt5}
