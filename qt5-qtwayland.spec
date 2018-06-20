@@ -2,7 +2,7 @@
 
 Summary: Qt5 - Wayland platform support and QtCompositor module
 Name:    qt5-%{qt_module}
-Version: 5.11.0
+Version: 5.11.1
 Release: 1%{?dist}
 
 License: LGPLv3
@@ -113,6 +113,9 @@ popd
 
 
 %changelog
+* Wed Jun 20 2018 Rex Dieter <rdieter@fedoraproject.org> - 5.11.1-1
+- 5.11.1
+
 * Sun May 27 2018 Rex Dieter <rdieter@fedoraproject.org> - 5.11.0-1
 - 5.11.0
 - use %%make_build %%ldconfig_scriptlets
