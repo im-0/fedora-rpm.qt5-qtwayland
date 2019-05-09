@@ -3,7 +3,7 @@
 Summary: Qt5 - Wayland platform support and QtCompositor module
 Name:    qt5-%{qt_module}
 Version: 5.12.1
-Release: 1%{?dist}
+Release: 2%{?dist}
 
 License: LGPLv3
 Url:     http://www.qt.io
@@ -27,7 +27,6 @@ BuildRequires:  pkgconfig(wayland-cursor)
 BuildRequires:  pkgconfig(wayland-egl)
 BuildRequires:  pkgconfig(egl)
 BuildRequires:  pkgconfig(gl)
-BuildRequires:  pkgconfig(glesv2)
 BuildRequires:  pkgconfig(xcomposite)
 BuildRequires:  pkgconfig(xrender)
 BuildRequires:  pkgconfig(libudev)
@@ -113,6 +112,9 @@ popd
 
 
 %changelog
+* Thu May 09 2019 Rex Dieter <rdieter@fedoraproject.org> - 5.12.1-2
+- drop BR: pkgconfig(glesv2)
+
 * Fri Feb 15 2019 Rex Dieter <rdieter@fedoraproject.org> - 5.12.1-1
 - 5.12.1
 
