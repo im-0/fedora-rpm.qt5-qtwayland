@@ -2,7 +2,7 @@
 
 Summary: Qt5 - Wayland platform support and QtCompositor module
 Name:    qt5-%{qt_module}
-Version: 5.12.3
+Version: 5.12.4
 Release: 1%{?dist}
 
 License: LGPLv3
@@ -112,6 +112,9 @@ popd
 
 
 %changelog
+* Fri Jun 14 2019 Jan Grulich <jgrulich@redhat.com> - 5.12.4-1
+- 5.12.4
+
 * Tue Jun 04 2019 Jan Grulich <jgrulich@redhat.com> - 5.12.3-1
 - 5.12.3
 
