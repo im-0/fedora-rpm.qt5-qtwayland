@@ -3,7 +3,7 @@
 Summary: Qt5 - Wayland platform support and QtCompositor module
 Name:    qt5-%{qt_module}
 Version: 5.12.4
-Release: 2%{?dist}
+Release: 3%{?dist}
 
 License: LGPLv3
 Url:     http://www.qt.io
@@ -15,6 +15,8 @@ Patch0:  qtwayland-fix-stuttering-when-gui-thread-is-busy.patch
 Patch1:  qtwayland-reset-frame-callback-timer-when-hiding-window.patch
 Patch2:  qtwayland-emit-wl-surfare-lifetime-signals.patch
 Patch3:  qtwayland-dont-send-fake-surface-created-destroyed-events.patch
+Patch4:  qtwayland-make-handleupdate-aware-of-exposure-changes.patch
+Patch5:  qtwayland-dont-crash-when-start-drag-without-dragfocus.patch
 
 # filter qml provides
 %global __provides_exclude_from ^%{_qt5_archdatadir}/qml/.*\\.so$
@@ -118,7 +120,10 @@ popd
 
 
 %changelog
-* Thu Jun 27 2019 Jan Grulich <jgrulich@redhat.com> -5.12.4-2
+* Thu Jul 02 2019 Jan Grulich <jgrulich@redhat.com> - 5.12.3-3
+- Pull in upstream fixes
+
+* Thu Jun 27 2019 Jan Grulich <jgrulich@redhat.com> - 5.12.4-2
 - Pull in upstream fixes
 
 * Fri Jun 14 2019 Jan Grulich <jgrulich@redhat.com> - 5.12.4-1
