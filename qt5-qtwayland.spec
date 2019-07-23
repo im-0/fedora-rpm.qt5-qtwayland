@@ -3,7 +3,7 @@
 Summary: Qt5 - Wayland platform support and QtCompositor module
 Name:    qt5-%{qt_module}
 Version: 5.12.4
-Release: 4%{?dist}
+Release: 5%{?dist}
 
 License: LGPLv3
 Url:     http://www.qt.io
@@ -19,12 +19,17 @@ Patch4:  qtwayland-make-handleupdate-aware-of-exposure-changes.patch
 Patch5:  qtwayland-dont-crash-when-start-drag-without-dragfocus.patch
 Patch6:  qtwayland-fix-expose-event-compression.patch
 
+# Upstreamable patches
+# https://fedoraproject.org/wiki/Changes/Qt_Wayland_By_Default_On_Gnome
+# https://bugzilla.redhat.com/show_bug.cgi?id=1732129
+Patch50: qtwayland-use-gnome-platform-theme-on-gnome-based-desktops.patch
+
 # filter qml provides
 %global __provides_exclude_from ^%{_qt5_archdatadir}/qml/.*\\.so$
 
 BuildRequires:  qt5-qtbase-devel >= %{version}
 BuildRequires:  qt5-qtbase-static
-BuildRequires: qt5-qtbase-private-devel
+BuildRequires:  qt5-qtbase-private-devel
 %{?_qt5:Requires: %{_qt5}%{?_isa} = %{_qt5_version}}
 BuildRequires:  qt5-qtdeclarative-devel
 
@@ -121,6 +126,10 @@ popd
 
 
 %changelog
+* Tue Jul 23 2019 Jan Grulich <jgrulich@redhat.com> - 5.12.3-5
+- Use Gnome platform theme on Gnome Wayland sessions
+  Resolves: bz#1732129
+
 * Thu Jul 11 2019 Jan Grulich <jgrulich@redhat.com> - 5.12.4-4
 - Pull in upstream fixes
 - Disable patch which is not needed anymore because of qtbase change
