@@ -3,7 +3,7 @@
 Summary: Qt5 - Wayland platform support and QtCompositor module
 Name:    qt5-%{qt_module}
 Version: 5.12.4
-Release: 5%{?dist}
+Release: 6%{?dist}
 
 License: LGPLv3
 Url:     http://www.qt.io
@@ -126,6 +126,9 @@ popd
 
 
 %changelog
+* Fri Jul 26 2019 Fedora Release Engineering <releng@fedoraproject.org> - 5.12.4-6
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_31_Mass_Rebuild
+
 * Tue Jul 23 2019 Jan Grulich <jgrulich@redhat.com> - 5.12.3-5
 - Use Gnome platform theme on Gnome Wayland sessions
   Resolves: bz#1732129
