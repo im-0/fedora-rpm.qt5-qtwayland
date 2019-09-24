@@ -2,8 +2,8 @@
 
 Summary: Qt5 - Wayland platform support and QtCompositor module
 Name:    qt5-%{qt_module}
-Version: 5.12.4
-Release: 7%{?dist}
+Version: 5.12.5
+Release: 1%{?dist}
 
 License: LGPLv3
 Url:     http://www.qt.io
@@ -11,14 +11,7 @@ Url:     http://www.qt.io
 Source0: https://download.qt.io/official_releases/qt/%{majmin}/%{version}/submodules/%{qt_module}-everywhere-src-%{version}.tar.xz
 
 # Upstream patches
-Patch0:  qtwayland-fix-stuttering-when-gui-thread-is-busy.patch
-Patch1:  qtwayland-reset-frame-callback-timer-when-hiding-window.patch
-Patch2:  qtwayland-emit-wl-surfare-lifetime-signals.patch
-# Patch3:  qtwayland-dont-send-fake-surface-created-destroyed-events.patch
-Patch4:  qtwayland-make-handleupdate-aware-of-exposure-changes.patch
-Patch5:  qtwayland-dont-crash-when-start-drag-without-dragfocus.patch
-Patch6:  qtwayland-fix-expose-event-compression.patch
-Patch7:  qtwayland-do-not-redraw-decorations-everytime.patch
+Patch0:  qtwayland-do-not-redraw-decorations-everytime.patch
 
 # Upstreamable patches
 # https://fedoraproject.org/wiki/Changes/Qt_Wayland_By_Default_On_Gnome
@@ -127,6 +120,9 @@ popd
 
 
 %changelog
+* Tue Sep 24 2019 Jan Grulich <jgrulich@redhat.com> - 5.12.5-1
+- 5.12.5
+
 * Tue Jul 30 2019 Jan Grulich <jgrulich@redhat.com> - 5.12.3-6
 - Do not redraw decorations everytime
 
