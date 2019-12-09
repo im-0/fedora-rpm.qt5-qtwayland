@@ -2,8 +2,8 @@
 
 Summary: Qt5 - Wayland platform support and QtCompositor module
 Name:    qt5-%{qt_module}
-Version: 5.12.5
-Release: 2%{?dist}
+Version: 5.13.2
+Release: 1%{?dist}
 
 License: LGPLv3
 Url:     http://www.qt.io
@@ -121,6 +121,9 @@ popd
 
 
 %changelog
+* Mon Dec 09 2019 Jan Grulich <jgrulich@redhat.com> - 5.13.2-1
+- 5.13.2
+
 * Fri Oct 18 2019 Jan Grulich <jgrulich@redhat.com> - 5.12.5-2
 - Client: Fix 100ms freeze when applications do not swap after deliverUpdateRequest
 
