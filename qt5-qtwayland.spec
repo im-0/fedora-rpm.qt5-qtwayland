@@ -41,6 +41,7 @@ BuildRequires:  pkgconfig(xrender)
 BuildRequires:  pkgconfig(libudev)
 BuildRequires:  pkgconfig(libinput)
 
+BuildRequires:  libXext-devel
 %description
 %{summary}.
 
