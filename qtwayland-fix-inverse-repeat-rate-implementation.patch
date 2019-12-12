@@ -1,0 +1,13 @@
+diff --git a/src/client/qwaylandinputdevice.cpp b/src/client/qwaylandinputdevice.cpp
+index eefd048..5819763 100644
+--- a/src/client/qwaylandinputdevice.cpp
++++ b/src/client/qwaylandinputdevice.cpp
+@@ -85,7 +85,7 @@ QWaylandInputDevice::Keyboard::Keyboard(QWaylandInputDevice *p)
+             // or the server didn't send an enter event first.
+             return;
+         }
+-        mRepeatTimer.setInterval(mRepeatRate);
++        mRepeatTimer.setInterval(1000 / mRepeatRate);
+         handleKey(mRepeatKey.time, QEvent::KeyRelease, mRepeatKey.key, mRepeatKey.modifiers,
+                   mRepeatKey.code, mRepeatKey.nativeVirtualKey, mRepeatKey.nativeModifiers,
+                   mRepeatKey.text, true);

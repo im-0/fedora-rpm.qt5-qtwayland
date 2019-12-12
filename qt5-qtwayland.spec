@@ -3,7 +3,7 @@
 Summary: Qt5 - Wayland platform support and QtCompositor module
 Name:    qt5-%{qt_module}
 Version: 5.13.2
-Release: 1%{?dist}
+Release: 2%{?dist}
 
 License: LGPLv3
 Url:     http://www.qt.io
@@ -13,6 +13,10 @@ Source0: https://download.qt.io/official_releases/qt/%{majmin}/%{version}/submod
 # Upstream patches
 Patch0:  qtwayland-do-not-redraw-decorations-everytime.patch
 Patch1:  qtwayland-fix-100ms-freeze-when-apps-dont-swap-after-deliverupdaterequest.patch
+Patch2:  qtwayland-fix-inverse-repeat-rate-implementation.patch
+Patch3:  qtwayland-fix-crash-when-showing-child-window-with-hidden-parent.patch
+
+Patch10: qtwayland-implement-primary-selection-unstable-v1.patch
 
 # Upstreamable patches
 # https://fedoraproject.org/wiki/Changes/Qt_Wayland_By_Default_On_Gnome
@@ -42,6 +46,8 @@ BuildRequires:  pkgconfig(libudev)
 BuildRequires:  pkgconfig(libinput)
 
 BuildRequires:  libXext-devel
+BuildRequires:  tree
+
 %description
 %{summary}.
 
@@ -122,6 +128,10 @@ popd
 
 
 %changelog
+* Wed Dec 11 2019 Jan Grulich <jgrulich@redhat.com> - 5.13.2-2
+- Add support for primary-selection-unstable-v1 protocol
+- Fix inverse repeat rate implementation
+
 * Mon Dec 09 2019 Jan Grulich <jgrulich@redhat.com> - 5.13.2-1
 - 5.13.2
 
