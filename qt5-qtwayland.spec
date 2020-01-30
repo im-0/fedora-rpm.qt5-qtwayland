@@ -3,7 +3,7 @@
 Summary: Qt5 - Wayland platform support and QtCompositor module
 Name:    qt5-%{qt_module}
 Version: 5.13.2
-Release: 2%{?dist}
+Release: 3%{?dist}
 
 License: LGPLv3
 Url:     http://www.qt.io
@@ -128,6 +128,9 @@ popd
 
 
 %changelog
+* Thu Jan 30 2020 Fedora Release Engineering <releng@fedoraproject.org> - 5.13.2-3
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_32_Mass_Rebuild
+
 * Wed Dec 11 2019 Jan Grulich <jgrulich@redhat.com> - 5.13.2-2
 - Add support for primary-selection-unstable-v1 protocol
 - Fix inverse repeat rate implementation
