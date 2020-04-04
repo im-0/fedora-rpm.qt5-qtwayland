@@ -2,8 +2,8 @@
 
 Summary: Qt5 - Wayland platform support and QtCompositor module
 Name:    qt5-%{qt_module}
-Version: 5.13.2
-Release: 3%{?dist}
+Version: 5.14.2
+Release: 1%{?dist}
 
 License: LGPLv3
 Url:     http://www.qt.io
@@ -11,12 +11,6 @@ Url:     http://www.qt.io
 Source0: https://download.qt.io/official_releases/qt/%{majmin}/%{version}/submodules/%{qt_module}-everywhere-src-%{version}.tar.xz
 
 # Upstream patches
-Patch0:  qtwayland-do-not-redraw-decorations-everytime.patch
-Patch1:  qtwayland-fix-100ms-freeze-when-apps-dont-swap-after-deliverupdaterequest.patch
-Patch2:  qtwayland-fix-inverse-repeat-rate-implementation.patch
-Patch3:  qtwayland-fix-crash-when-showing-child-window-with-hidden-parent.patch
-
-Patch10: qtwayland-implement-primary-selection-unstable-v1.patch
 
 # Upstreamable patches
 # https://fedoraproject.org/wiki/Changes/Qt_Wayland_By_Default_On_Gnome
@@ -128,6 +122,9 @@ popd
 
 
 %changelog
+* Sat Apr 04 2020 Rex Dieter <rdieter@fedoraproject.org> - 5.14.2-1
+- 5.14.2
+
 * Thu Jan 30 2020 Fedora Release Engineering <releng@fedoraproject.org> - 5.13.2-3
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_32_Mass_Rebuild
 
