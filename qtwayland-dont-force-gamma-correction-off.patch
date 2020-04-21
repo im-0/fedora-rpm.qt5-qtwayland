@@ -1,0 +1,32 @@
+From e72f7db39f58063267036a4e5d066e70a80184b2 Mon Sep 17 00:00:00 2001
+From: Allan Sandfeld Jensen <allan.jensen@qt.io>
+Date: Tue, 21 Apr 2020 10:11:41 +0200
+Subject: [PATCH] Don't force gamma-correction off
+
+The freetype backend can now do selective gamma-correcting, but need
+to have a useful gamma-value.
+
+Fixes: QTBUG-83636
+Change-Id: I89e99d0a63b75d15d70763ee0c2459caa761beee
+Reviewed-by: David Edmundson <davidedmundson@kde.org>
+Reviewed-by: Eskil Abrahamsen Blomfeldt <eskil.abrahamsen-blomfeldt@qt.io>
+---
+
+diff --git a/src/client/qwaylandintegration.cpp b/src/client/qwaylandintegration.cpp
+index 85c1990..2e0d508 100644
+--- a/src/client/qwaylandintegration.cpp
++++ b/src/client/qwaylandintegration.cpp
+@@ -233,13 +233,6 @@
+     if (hint == ShowIsFullScreen && mDisplay->windowManagerIntegration())
+         return mDisplay->windowManagerIntegration()->showIsFullScreen();
+ 
+-    switch (hint) {
+-    case QPlatformIntegration::FontSmoothingGamma:
+-        return qreal(1.0);
+-    default:
+-        break;
+-    }
+-
+     return QPlatformIntegration::styleHint(hint);
+ }
+ 

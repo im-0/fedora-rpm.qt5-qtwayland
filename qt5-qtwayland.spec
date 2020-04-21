@@ -3,7 +3,7 @@
 Summary: Qt5 - Wayland platform support and QtCompositor module
 Name:    qt5-%{qt_module}
 Version: 5.13.2
-Release: 3%{?dist}
+Release: 4%{?dist}
 
 License: LGPLv3
 Url:     http://www.qt.io
@@ -15,8 +15,12 @@ Patch0:  qtwayland-do-not-redraw-decorations-everytime.patch
 Patch1:  qtwayland-fix-100ms-freeze-when-apps-dont-swap-after-deliverupdaterequest.patch
 Patch2:  qtwayland-fix-inverse-repeat-rate-implementation.patch
 Patch3:  qtwayland-fix-crash-when-showing-child-window-with-hidden-parent.patch
+# Bold fonts in qt applications appear much too heavy
+# https://bugzilla.redhat.com/show_bug.cgi?id=1823984
+Patch4:  qtwayland-dont-force-gamma-correction-off.patch
 
 Patch10: qtwayland-implement-primary-selection-unstable-v1.patch
+
 
 # Upstreamable patches
 # https://fedoraproject.org/wiki/Changes/Qt_Wayland_By_Default_On_Gnome
@@ -128,6 +132,10 @@ popd
 
 
 %changelog
+* Tue Apr 21 2020 Jan Grulich <jgrulich@redhat.com> - 5.13.2-4
+- Fix bold font rendering
+  Resolves: bz#1823984
+
 * Thu Jan 30 2020 Fedora Release Engineering <releng@fedoraproject.org> - 5.13.2-3
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_32_Mass_Rebuild
 
