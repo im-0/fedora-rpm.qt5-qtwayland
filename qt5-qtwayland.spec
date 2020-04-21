@@ -3,7 +3,7 @@
 Summary: Qt5 - Wayland platform support and QtCompositor module
 Name:    qt5-%{qt_module}
 Version: 5.14.2
-Release: 1%{?dist}
+Release: 2%{?dist}
 
 License: LGPLv3
 Url:     http://www.qt.io
@@ -11,6 +11,10 @@ Url:     http://www.qt.io
 Source0: https://download.qt.io/official_releases/qt/%{majmin}/%{version}/submodules/%{qt_module}-everywhere-src-%{version}.tar.xz
 
 # Upstream patches
+
+# Bold fonts in qt applications appear much too heavy
+# https://bugzilla.redhat.com/show_bug.cgi?id=1823984
+Patch0:  qtwayland-dont-force-gamma-correction-off.patch
 
 # Upstreamable patches
 # https://fedoraproject.org/wiki/Changes/Qt_Wayland_By_Default_On_Gnome
@@ -122,6 +126,10 @@ popd
 
 
 %changelog
+* Tue Apr 21 2020 Jan Grulich <jgrulich@redhat.com> - 5.14.2-2
+- Fix bold font rendering
+  Resolves: bz#1823984
+
 * Sat Apr 04 2020 Rex Dieter <rdieter@fedoraproject.org> - 5.14.2-1
 - 5.14.2
 
