@@ -3,7 +3,7 @@
 Summary: Qt5 - Wayland platform support and QtCompositor module
 Name:    qt5-%{qt_module}
 Version: 5.13.2
-Release: 4%{?dist}
+Release: 5%{?dist}
 
 License: LGPLv3
 Url:     http://www.qt.io
@@ -19,8 +19,12 @@ Patch3:  qtwayland-fix-crash-when-showing-child-window-with-hidden-parent.patch
 # https://bugzilla.redhat.com/show_bug.cgi?id=1823984
 Patch4:  qtwayland-dont-force-gamma-correction-off.patch
 
-Patch10: qtwayland-implement-primary-selection-unstable-v1.patch
+# Transferring large amounts of data via clipboard may lead to
+# stack overflow and segmentation fault because of recursion in
+# QtWaylandClient::QWaylandMimeData::readData().
+Patch5:  qtwayland-remove-recursion-in-data-offer-retrieval.patch
 
+Patch10: qtwayland-implement-primary-selection-unstable-v1.patch
 
 # Upstreamable patches
 # https://fedoraproject.org/wiki/Changes/Qt_Wayland_By_Default_On_Gnome
@@ -132,6 +136,9 @@ popd
 
 
 %changelog
+* Thu Apr 30 2020 Ivan Mironov <mironov.ivan@gmail.com> - 5.13.2-5
+- Cherry-pick fix for clipboard related crash from v5.15.0
+
 * Tue Apr 21 2020 Jan Grulich <jgrulich@redhat.com> - 5.13.2-4
 - Fix bold font rendering
   Resolves: bz#1823984
