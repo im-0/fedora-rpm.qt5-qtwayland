@@ -3,7 +3,7 @@
 Summary: Qt5 - Wayland platform support and QtCompositor module
 Name:    qt5-%{qt_module}
 Version: 5.14.2
-Release: 2%{?dist}
+Release: 3%{?dist}
 
 License: LGPLv3
 Url:     http://www.qt.io
@@ -15,6 +15,11 @@ Source0: https://download.qt.io/official_releases/qt/%{majmin}/%{version}/submod
 # Bold fonts in qt applications appear much too heavy
 # https://bugzilla.redhat.com/show_bug.cgi?id=1823984
 Patch0:  qtwayland-dont-force-gamma-correction-off.patch
+
+# Transferring large amounts of data via clipboard may lead to
+# stack overflow and segmentation fault because of recursion in
+# QtWaylandClient::QWaylandMimeData::readData().
+Patch1:  qtwayland-remove-recursion-in-data-offer-retrieval.patch
 
 # Upstreamable patches
 # https://fedoraproject.org/wiki/Changes/Qt_Wayland_By_Default_On_Gnome
@@ -126,6 +131,9 @@ popd
 
 
 %changelog
+* Thu Apr 30 2020 Ivan Mironov <mironov.ivan@gmail.com> - 5.14.2-3
+- Cherry-pick fix for clipboard related crash from v5.15.0
+
 * Tue Apr 21 2020 Jan Grulich <jgrulich@redhat.com> - 5.14.2-2
 - Fix bold font rendering
   Resolves: bz#1823984
